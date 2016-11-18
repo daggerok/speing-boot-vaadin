@@ -1,0 +1,34 @@
+speing-boot-vaadin-mongo:
+  container_name: speing-boot-vaadin-mongo
+  image: mongo
+  environment:
+    - MONGO_PORT_27017_TCP_ADDR=localhost
+    - MONGO_PORT_27017_TCP_PORT=27017
+  ports:
+    - "27017:27017"
+
+# https://github.com/mongo-express/mongo-express-docker
+speing-boot-vaadin-mongo-express:
+  container_name: speing-boot-vaadin-mongo-express
+  image: mongo-express
+  ports:
+    - "8081:8081"
+  links:
+    - speing-boot-vaadin-mongo
+  environment:
+    # should be a custom mongo container name:
+    ME_CONFIG_MONGODB_SERVER: speing-boot-vaadin-mongo
+    ME_CONFIG_OPTIONS_EDITORTHEME: ambiance
+    ME_CONFIG_SITE_BASEURL: /
+
+# http://localhost:8082
+speing-boot-vaadin-rabbitmq:
+   image: rabbitmq:3-management
+   container_name: speing-boot-vaadin-rabbitmq-admin
+   environment:
+     RABBITMQ_DEFAULT_USER: admin
+     RABBITMQ_DEFAULT_PASS: admin
+   ports:
+     - "5672:5672"
+     - "8082:15672"
+     - "25672:25672"

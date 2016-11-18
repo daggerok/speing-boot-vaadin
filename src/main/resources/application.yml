@@ -1,0 +1,15 @@
+server.port: 0
+spring:
+  application.name: speing-boot-vaadin
+  cloud.stream.bindings.vaadinOutputChannel:
+    destination: vaadin
+    group: durable-grop
+  cloud.stream.bindings.vaadinInputChannel:
+    destination: vaadin
+    group: durable-grup
+  rabbitmq:
+    username: admin
+    password: admin
+app:
+  fixed-delay: 1000
+  max-messages-per-poll: 1
