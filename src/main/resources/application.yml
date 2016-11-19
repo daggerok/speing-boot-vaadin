@@ -1,4 +1,4 @@
-server.port: 0
+#server.port: 0
 spring:
   application.name: speing-boot-vaadin
   cloud.stream.bindings.vaadinOutputChannel:
