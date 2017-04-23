@@ -1,15 +1,15 @@
-sudo: required
+group: edge
 dist: trusty
 install: true
 language: java
 jdk: oraclejdk8
 env:
-  DOCKER_COMPOSE_VERSION: 1.9.0-rc4
+  DOCKER_COMPOSE_VERSION: 1.12.0
 before_install:
-  - sudo rm /usr/local/bin/docker-compose
-  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - sudo rm -rf /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m) > docker-compose
   - chmod +x docker-compose
-  - sudo mv docker-compose /usr/local/bin
+  - sudo mv -f docker-compose /usr/local/bin
   - docker-compose up -d
 script: gradle clean build
 after_script: docker-compose down
